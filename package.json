@@ -9,19 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jorgeferrero/stream-to-buffer": "^2.0.6",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "image-data-uri": "^2.0.1",
+    "lucide-react": "^0.292.0",
+    "next": "14.0.2",
+    "qr-image": "^3.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.2"
+    "redis": "^4.6.10",
+    "socket.io-client": "^4.7.2",
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.2",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.2"
+    "typescript": "^5"
   }
 }

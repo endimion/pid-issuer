@@ -7,10 +7,14 @@ let _client = null;
 async function getClient() {
   if (_client === null || _client === undefined) {
     _client = createClient({
-      host: process.env.REDIS_URL,
-      port: 6379,
-      // other configurations if needed
+      // host: 'https://dss.aegean.gr',//process.env.REDIS_URL,
+      // port: 6379,
+      // // other configurations if needed
+      socket: {
+        host: process.env.REDIS_URL
+      }
     });
+    console.log("connecting to redis:-"+process.env.REDIS_URL+"-")
     await _client.connect();
   }
 
@@ -55,7 +59,7 @@ async function getSessionData(sessionId, variableName = null) {
     return variableName !== null ? valueAsObject[variableName] : sessionData;
   } catch (e) {
     console.log(e);
-    return e;
+    return null;
   }
   // });
 }

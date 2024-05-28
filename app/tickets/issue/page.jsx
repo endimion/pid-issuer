@@ -1,10 +1,13 @@
-
 import WalletInteraction from "@/components/walletInteraction";
 
 import Placeholder from "./Placeholder.png";
 import Bluecheck from "./bluecheck.png";
 
 async function getGatacaRequestQR() {
+
+  
+
+
   try {
     const response = await fetch(
       process.env.WEBSOCKET_SERVER_URL +
@@ -19,6 +22,13 @@ async function getGatacaRequestQR() {
     // console.log(responseData);
     return responseData;
   } catch (error) {
+    console.log(
+      `error trying ${
+        process.env.WEBSOCKET_SERVER_URL +
+        "/makeIssueOffer/" +
+        process.env.GATACA_ISSUE_TEMPLATE
+      } ,`
+    );
     console.error("Error fetching GATACA Issuance Request", error);
     return {
       error: error,
@@ -35,9 +45,6 @@ export default async function Issue({ params, searchParams }) {
   const qrGenerationResult = await getGatacaRequestQR();
   const gatacaSession = qrGenerationResult.gatacaSession;
 
-
-
-  
   return (
     <WalletInteraction
       error={qrGenerationResult.error}

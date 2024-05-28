@@ -11,6 +11,9 @@ export default function FindTicketsForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || ''; // Fallback to '' if not set
+  // console.log("YOOOO---->"+baseUrl)
+
   function handleInputChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -29,11 +32,12 @@ export default function FindTicketsForm() {
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/cff?lastName=${formData.lastName}&pnr=${formData.pnr}`
+        `${baseUrl}/api/cff?lastName=${formData.lastName}&pnr=${formData.pnr}`,
+        { cache: "no-store" }
       );
       const ticketsQueryResponse = await res.json();
+      console.log(ticketsQueryResponse);
       if (ticketsQueryResponse.status == 200) {
-        console.log(ticketsQueryResponse);
         // store in cache the "issuance state of the ticket as well"
         ticketsQueryResponse.tickets = ticketsQueryResponse.tickets.map(
           (ticket) => {
@@ -54,10 +58,17 @@ export default function FindTicketsForm() {
           `/tickets/viewTickets?sessionId=${ticketsQueryResponse.sessionId}`
         );
       } else {
-        setLoading(false);
-        setTicketError(
-          `Error fetching tickets for provided details. Please ensure they are correct and try again.`
-        );
+        if (ticketsQueryResponse.status == 404) {
+          setLoading(false);
+          setTicketError(
+            `No tickets found for ${formData.lastName} under booking number ${formData.pnr}.  <br/> Please ensure these values are correct and try again.`
+          );
+        } else {
+          setLoading(false);
+          setTicketError(
+            `Error fetching tickets for provided details. Please ensure they are correct and try again.`
+          );
+        }
       }
     } catch (e) {
       // console.log(e);
@@ -69,11 +80,12 @@ export default function FindTicketsForm() {
   };
 
   let ticketErrorMessage = ticketError ? (
-    <>
-      <h3 className="m-8 text-1xl font-semibold text-amber-700 text-center">
-        {ticketError}{" "}
-      </h3>
-    </>
+    <div>
+      <h3
+        className="m-8 text-1xl font-semibold text-amber-700 text-center"
+        dangerouslySetInnerHTML={{ __html: ticketError }}
+      ></h3>
+    </div>
   ) : (
     <></>
   );
@@ -109,7 +121,7 @@ export default function FindTicketsForm() {
             />
           </div>
           <div className="mt-6 flex justify-end">
-            <Button className="bg-red-500 text-white text-xl" type="submit">
+            <Button className="bg-red-500 text-white text-xl mb-8" type="submit">
               Submit
             </Button>
           </div>

@@ -15,6 +15,37 @@ export default function Websocket({
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [isIssued, setIsIssued] = useState(false);
   const [gatacaSession, setGatacaSession] = useState(null);
+  
+
+
+  async function initiateIssuance(sessionId, gatacaSession, ticketId) {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || ''; // Fallback to '' if not set
+    const issueAPIURL = `${baseUrl}/api/credentials`;
+  
+    const requestObject = {
+      gatacaSession: gatacaSession,
+      ticketId: ticketId,
+      sessionId: sessionId,
+    };
+  
+    const options = {
+      method: "POST",
+      body: JSON.stringify(requestObject),
+      next: {
+        revalidate: 0,
+      },
+    };
+  //   console.log("test", sessionId, gatacaSession, ticketId)
+    try {
+      const response = await fetch(issueAPIURL, options);
+      // console.log(await response.json());
+      return await response.json()
+    } catch (e) {
+      console.log(e);
+      return e
+    }
+  }
+  
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -54,29 +85,3 @@ export default function Websocket({
   return <></>;
 }
 
-async function initiateIssuance(sessionId, gatacaSession, ticketId) {
-  const issueAPIURL = "/api/credentials";
-
-  const requestObject = {
-    gatacaSession: gatacaSession,
-    ticketId: ticketId,
-    sessionId: sessionId,
-  };
-
-  const options = {
-    method: "POST",
-    body: JSON.stringify(requestObject),
-    next: {
-      revalidate: 0,
-    },
-  };
-//   console.log("test", sessionId, gatacaSession, ticketId)
-  try {
-    const response = await fetch(issueAPIURL, options);
-    // console.log(await response.json());
-    return await response.json()
-  } catch (e) {
-    console.log(e);
-    return e
-  }
-}

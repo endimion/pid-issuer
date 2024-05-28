@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import Logo from "./logo.png";
 import ewcLogo from "./ewcLogo.webp";
 import MobileSideBar from "@/components/mobileSidebar.jsx";
+import FullConsentModal from "@/components/fullConsentModal.jsx";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -20,6 +21,7 @@ import MobileSideBar from "@/components/mobileSidebar.jsx";
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
 
   const [windowSize, setWindowSize] = useState({
     width: 0,
@@ -51,6 +53,19 @@ export default function RootLayout({ children }) {
       };
     }
   }, []); // Empty dependency array ensures the effect runs only once on mount
+
+  
+  const clickConsent = (event) => {
+    // console.log("clicked!");
+    event.preventDefault();
+    setShowConsent(true);
+  };
+
+
+  const onConsentClose = () =>{
+    console.log("consent closed");
+    setShowConsent(false)
+  }
 
   const homeLinkText =
     windowSize.width >= 640 ? (
@@ -191,7 +206,11 @@ export default function RootLayout({ children }) {
               )}
 
               {isMenuOpen && windowSize.width < 640 ? (
-                <MobileSideBar windowSize={windowSize} isMenuOpen={isMenuOpen} pathname={pathname}/>
+                <MobileSideBar
+                  windowSize={windowSize}
+                  isMenuOpen={isMenuOpen}
+                  pathname={pathname}
+                />
               ) : (
                 <></>
               )}
@@ -246,14 +265,25 @@ export default function RootLayout({ children }) {
                 </p>
               </div>
             </div>
-            <p className="text-lg font-semibold text-white w-full md:w-1/3 md:text-center">
-              Developed by UAegean i4m lab
-            </p>
+            <div className="w-full md:w-1/3 md:text-center">
+              <p className="text-lg font-semibold text-white">
+                Developed by UAegean i4m lab
+              </p>
+              {/* Privacy Policy link under the developer text */}
+              <Link href="#" legacyBehavior={true}>
+                <a
+                  onClick={clickConsent}
+                  className="text-sm text-white hover:underline mt-2 md:mt-4 block"
+                >
+                  Read our Privacy Policy
+                </a>
+              </Link>
+            </div>
             <div className="w-full md:w-1/3 md:pl-4">
               <div className="flex flex-col space-y-2 md:text-center">
                 <h2 className="text-lg font-semibold text-white">Contact Us</h2>
                 <p className="text-sm font-semibold text-white">
-                  Email: info@company.com
+                  Email: info@i4mlab-aegean.gr
                 </p>
                 <p className="text-sm font-semibold text-white">
                   Phone: +1 234 567 890
@@ -262,6 +292,7 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         </div>
+        {showConsent && <FullConsentModal initialState={true} consentClose={onConsentClose}/>}
       </body>
     </html>
   );

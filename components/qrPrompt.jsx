@@ -13,7 +13,7 @@ export default function QRPrompt({ qrContent }) {
         {qrContent}
         <div className="flex flex-col text-lg font-medium text-gray-900 md:ml-6 mt-4 md:mt-0">
           <h1 className="font-semibold">
-            Don't have a Wallet yet? Follow the next steps:
+            Don&apos;t have a Wallet yet? Follow the next steps:
           </h1>
           <ul className="list-decimal list-inside mt-4">
             <li>

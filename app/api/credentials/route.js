@@ -9,24 +9,11 @@ const imageDataURI = require("image-data-uri");
 
 export async function POST(request) {
   const { sessionId, gatacaSession, ticketId } = await request.json();
-  const tickets = await getSessionData(sessionId, "tickets");
-  const serverURI = process.env.WEBSOCKET_SERVER_URL + "/issue";
-  
-  let ticketData = tickets[ticketId];
-  let qrCode = await makeQRdata(ticketData.ticketLet+ticketData.ticketNumber)
-  
-  ticketData["qrCode"] = qrCode
-  
-
-  const requestObject = {
-    gatacaSession: gatacaSession,
-    userData: ticketData,
-    issueTemplate: process.env.GATACA_ISSUE_TEMPLATE,
-  };
+  // const tickets = await getSessionData(sessionId, "tickets");
+  const serverURI = process.env.WEBSOCKET_SERVER_URL + "/pre-offer-jwt-pid";
 
   const options = {
-    method: "POST",
-    body: JSON.stringify(requestObject),
+    method: "GET",
     next: {
       revalidate: 0,
     },
@@ -38,20 +25,4 @@ export async function POST(request) {
     console.log(e);
   }
   return NextResponse.json({ status: "OK" });
-}
-
-
-async function makeQRdata(qrData){
-  let code = qr.image(qrData, {
-    type: "jpg",
-    ec_level: "H",
-    size: 10,
-    margin: 10,
-  });
-  let mediaType = "jpg";
-  let encodedQR = imageDataURI.encode(
-    await streamToBuffer(code),
-    mediaType
-  );
-  return encodedQR
 }

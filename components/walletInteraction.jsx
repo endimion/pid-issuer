@@ -4,6 +4,7 @@ import QRPrompt from "@/components/qrPrompt";
 import DeepLinkPrompt from "@/components/deepLinkPrompt";
 import IssueComplete from "@/components/issueComplete";
 import Websocket from "@/components/websocket";
+import Polling from "@/components/polling";
 import { useEffect, useState } from "react";
 
 export default function WalletInteraction({
@@ -65,8 +66,6 @@ export default function WalletInteraction({
   useEffect(() => {
     if (isComplete && tickets.tickets && tickets.tickets.length > 0) {
       let ticketToUpdate = tickets.tickets[ticketIndex];
-      console.log(tickets.tickets);
-      console.log(ticketToUpdate);
       ticketToUpdate.issued = isComplete;
       tickets.tickets[ticketIndex] = ticketToUpdate;
       setTicket(tickets);
@@ -104,7 +103,7 @@ export default function WalletInteraction({
 
   let content = (
     <>
-      <Websocket
+      {/* <Websocket
         gatacaSessionId={gatacaSession}
         cffSessionId={cffSessionId}
         ticketIndex={ticketIndex}
@@ -114,21 +113,35 @@ export default function WalletInteraction({
         issueCompleted={() => {
           setIsComplete(true);
         }}
-      />
+      /> */}
 
+      <Polling
+        issuanceSession={cffSessionId}
+        WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
+        issueCompleted={() => {
+          setIsComplete(true);
+        }}
+      />
       <QRPrompt qrContent={qrContent} />
     </>
   );
 
   let contentMobile = (
     <>
-      <Websocket
+      {/* <Websocket
         gatacaSessionId={gatacaSession}
         cffSessionId={cffSessionId}
         ticketIndex={ticketIndex}
         issueTemplate={issueTemplate}
         WEBSOCKET_SERVER={WEBSOCKET_SERVER}
         WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
+        issueCompleted={() => {
+          setIsComplete(true);
+        }}
+      /> */}
+      <Polling
+        WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
+        issuanceSession={cffSessionId}
         issueCompleted={() => {
           setIsComplete(true);
         }}

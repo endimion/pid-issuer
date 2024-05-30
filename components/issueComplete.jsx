@@ -11,7 +11,7 @@ export default function IssueCompleted({ imageContent }) {
         {imageContent}
         <div className="flex flex-col text-lg font-medium text-gray-900 md:ml-6 mt-4 md:mt-0">
           <h1 className="font-semibold">
-            The Boarding Pass has been sent to your wallet
+            The PID Credential has been sent to your wallet
           </h1>
         </div>
       </div>

@@ -48,38 +48,38 @@ export default function Websocket({
   
 
   useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
-      socket.emit("message", {
-        type: "start-session",
-        id: gatacaSessionId,
-        socketID: socket.id,
-        credential: issueTemplate,
-      });
-    });
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
-    socket.on("message", async (data) => {
-      // console.log(data)
-      if (data.status === "READY" && data.sessionId === gatacaSessionId) {
-        console.log("my issuance is completed");
+    // socket.on("connect", () => {
+    //   setIsConnected(true);
+    //   socket.emit("message", {
+    //     type: "start-session",
+    //     id: gatacaSessionId,
+    //     socketID: socket.id,
+    //     credential: issueTemplate,
+    //   });
+    // });
+    // socket.on("disconnect", () => {
+    //   setIsConnected(false);
+    // });
+    // socket.on("message", async (data) => {
+    //   // console.log(data)
+    //   if (data.status === "READY" && data.sessionId === gatacaSessionId) {
+    //     console.log("my issuance is completed");
         
-        let response = await initiateIssuance(cffSessionId, gatacaSessionId, ticketIndex);
-        console.log(response)
-        if(response.status == 400){
-          alert("ERROR")
-        }else{
-          issueCompleted()
-        }
-      }
-    });
+    //     let response = await initiateIssuance(cffSessionId, gatacaSessionId, ticketIndex);
+    //     console.log(response)
+    //     if(response.status == 400){
+    //       alert("ERROR")
+    //     }else{
+    //       issueCompleted()
+    //     }
+    //   }
+    // });
 
-    return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-      socket.off("message");
-    };
+    // return () => {
+    //   socket.off("connect");
+    //   socket.off("disconnect");
+    //   socket.off("message");
+    // };
   }, []);
 
   return <></>;

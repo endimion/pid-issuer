@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     // output: 'standalone'
-    basePath: '/cff',
+    basePath: '/pid',
 }
 
 module.exports = nextConfig

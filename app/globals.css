@@ -9,6 +9,29 @@
 .hamburger-icon {
   /* Your styles for the hamburger icon */
 }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+input, button {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #4a4a9e;
+}
+
+a {
+  color: #4a4a9e;
+}
+
+a:hover {
+  color: #8256d0;
+}
+
+
 
 /* Navigation visibility based on screen size */
 @media (min-width: 640px) {

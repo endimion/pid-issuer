@@ -37,8 +37,11 @@ export default function RootLayout({ children }) {
                 <Link href="/" className={`text-lg font-medium ${pathname === "/" ? "text-white" : "text-gray-200 hover:text-white"}`}>
                   Select Persona
                 </Link>
-                <Link href="/tickets/issue" className={`text-lg font-medium ${pathname === "/tickets/issue" ? "text-white" : "text-gray-200 hover:text-white"}`}>
+                <Link href="/" className={`text-lg font-medium ${pathname === "/tickets/issue" ? "text-white" : "text-gray-200 hover:text-white"}`}>
                  Issue PID
+                </Link>
+                <Link href="/" className={`text-lg font-medium ${pathname === "/tickets/issue" ? "text-white" : "text-gray-200 hover:text-white"}`}>
+                 Issue Passport
                 </Link>
               </nav>
             </div>

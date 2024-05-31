@@ -21,6 +21,7 @@ export default function WalletInteraction({
   CompleteImg,
   Continue,
   id,
+  Terminate
 }) {
   const [tickets, setTicket] = useState([]);
   const [ticketTimestamp, setTicketTimestamp] = useState(null);
@@ -152,6 +153,7 @@ export default function WalletInteraction({
         />
       }
       Continue={Continue}
+      Terminate={Terminate}
       id={id}
     />
   );

@@ -70,6 +70,7 @@ export default async function Personas({ searchParams }) {
       deepLink={qrGenerationResult.deepLink}
       Placeholder={Placeholder}
       CompleteImg={Bluecheck}
+      Terminate={true}
     />
   );
 }

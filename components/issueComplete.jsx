@@ -1,7 +1,14 @@
+"use client"
+
 import Link from "next/link";
 import BackButton from "./backButton";
 
-export default function IssueCompleted({ imageContent, Continue, id }) {
+export default function IssueCompleted({
+  imageContent,
+  Continue,
+  id,
+  Terminate,
+}) {
   let button = Continue ? (
     <Link href={`/passports?id=${id}`} passHref>
       <button
@@ -13,6 +20,17 @@ export default function IssueCompleted({ imageContent, Continue, id }) {
   ) : (
     <BackButton />
   );
+  if (Terminate) {
+    button = (
+      <Link href={`https://stg-ewcpilot-staging.kinsta.cloud/`} passHref>
+        <button
+          className={`mt-4 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75`}
+        >
+          Return to Mirco-site &rarr;
+        </button>
+      </Link>
+    );
+  }
 
   let completeMessage = Continue
     ? " The PID Credential has been sent to your wallet"

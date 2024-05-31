@@ -26,19 +26,16 @@ export default function DeeplinkPrompt({ deepLink }) {
           </h1>
           <ul className="list-decimal list-inside mt-4">
             <li>
-              Download the GATACA Wallet app from the
+              Download an EWC Compliant Wallet from the following links
               <div className="mt-2 flex flex-col md:flex-row">
                 <Link className="underline text-blue-500" href="#">
                   Google Play Store
                 </Link>
-                <span className="mx-2 hidden md:inline">or</span>
-                <Link className="underline text-blue-500" href="#">
-                  Apple App Store
-                </Link>
+                 
               </div>
             </li>
             <li>
-              With the GATACA Wallet installed, click the &quot;Connect Wallet&quot; button to receive your 
+              With an EWC Conformant Wallet installed, click the &quot;Connect Wallet&quot; button to receive your 
               Boarding Pass.
             </li>
           </ul>

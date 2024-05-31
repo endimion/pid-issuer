@@ -19,6 +19,8 @@ export default function WalletInteraction({
   deepLink,
   Placeholder,
   CompleteImg,
+  Continue,
+  personaId,
 }) {
   const [tickets, setTicket] = useState([]);
   const [ticketTimestamp, setTicketTimestamp] = useState(null);
@@ -62,23 +64,6 @@ export default function WalletInteraction({
       };
     }
   }, []);
-
-  useEffect(() => {
-    if (isComplete && tickets.tickets && tickets.tickets.length > 0) {
-      let ticketToUpdate = tickets.tickets[ticketIndex];
-      ticketToUpdate.issued = isComplete;
-      tickets.tickets[ticketIndex] = ticketToUpdate;
-      setTicket(tickets);
-      const stateObject = {
-        tickets: tickets,
-        sessionId: tickets.sessionId,
-        timestamp: ticketTimestamp,
-      };
-      localStorage.setItem("state", JSON.stringify(stateObject));
-      let storedState = localStorage.getItem("state");
-      console.log(storedState);
-    }
-  }, [isComplete, tickets]);
 
   const errorContet = (
     <>
@@ -166,6 +151,8 @@ export default function WalletInteraction({
           width="150"
         />
       }
+      Continue={Continue}
+      personaId={personaId}
     />
   );
 

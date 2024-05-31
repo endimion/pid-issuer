@@ -4,11 +4,10 @@ import Placeholder from "./Placeholder.png";
 import Bluecheck from "./bluecheck.png";
 
 async function generateVCIrequest(sessionId, personaId) {
-  console.log("Generating new VCI Request");
   try {
     const response = await fetch(
       process.env.WEBSOCKET_SERVER_URL +
-        "/offer-pid-persona?sessionId=" +
+        "/pre-offer-jwt-passport=" +
         sessionId +
         "&personaId=" +
         personaId,
@@ -16,7 +15,6 @@ async function generateVCIrequest(sessionId, personaId) {
         cache: "no-cache",
       }
     );
-    console.log("making new issuance session... ");
     const responseData = await response.json();
     // console.log(responseData);
     return responseData;
@@ -69,8 +67,6 @@ export default async function Personas({ params, searchParams }) {
       deepLink={qrGenerationResult.deepLink}
       Placeholder={Placeholder}
       CompleteImg={Bluecheck}
-      Continue={true}
-      personaId={id}
     />
   );
 }

@@ -1,13 +1,14 @@
 import WalletInteraction from "@/components/walletInteraction";
+import { v4 as uuidv4 } from "uuid";
 
 import Placeholder from "./Placeholder.png";
 import Bluecheck from "./bluecheck.png";
 
-async function generateVCIrequest(sessionId, personaId) {
+async function generateVCIrequest(personaId, sessionId) {
   try {
     const response = await fetch(
       process.env.WEBSOCKET_SERVER_URL +
-        "/pre-offer-jwt-passport=" +
+        "/pre-offer-jwt-passport?sessionId=" +
         sessionId +
         "&personaId=" +
         personaId,
@@ -22,9 +23,11 @@ async function generateVCIrequest(sessionId, personaId) {
     console.log(
       `error trying ${
         process.env.WEBSOCKET_SERVER_URL +
-        "/makeIssueOffer/" +
-        process.env.ISSUE_TEMPLATE
-      } ,`
+        "/pre-offer-jwt-passport=" +
+        sessionId +
+        "&personaId=" +
+        personaId
+      }`
     );
     console.error("Error fetching Issuance Request", error);
     return {
@@ -33,20 +36,20 @@ async function generateVCIrequest(sessionId, personaId) {
   }
 }
 
-export default async function Personas({ params, searchParams }) {
+export default async function Personas({ searchParams }) {
   // const { searchParams } = new URL(req.url);
-  const { sessionId, id } = searchParams;
-  const cffSessionId = sessionId+ "-persona=" + id;
+  const { id } = searchParams;
+  const issueSessionId = uuidv4() + "-persona=" + id;
   const ticketIndex = id;
 
-  const qrGenerationResult = await generateVCIrequest(sessionId, id);
+  const qrGenerationResult = await generateVCIrequest(id, issueSessionId);
   const gatacaSession = qrGenerationResult.gatacaSession;
 
   return (
     <WalletInteraction
       error={qrGenerationResult.error}
       gatacaSession={gatacaSession}
-      cffSessionId={cffSessionId}
+      issueSessionId={issueSessionId}
       ticketIndex={ticketIndex}
       issueTemplate={process.env.ISSUE_TEMPLATE}
       WEBSOCKET_SERVER={process.env.WEBSOCKET_SERVER} //TODO there is not WB support

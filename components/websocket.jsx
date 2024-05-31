@@ -7,7 +7,7 @@ export default function Websocket({
   gatacaSessionId,
   issueTemplate,
   WEBSOCKET_SERVER,
-  cffSessionId,
+  issueSessionId,
   ticketIndex,
   issueCompleted,
 }) {
@@ -65,7 +65,7 @@ export default function Websocket({
     //   if (data.status === "READY" && data.sessionId === gatacaSessionId) {
     //     console.log("my issuance is completed");
         
-    //     let response = await initiateIssuance(cffSessionId, gatacaSessionId, ticketIndex);
+    //     let response = await initiateIssuance(issueSessionId, gatacaSessionId, ticketIndex);
     //     console.log(response)
     //     if(response.status == 400){
     //       alert("ERROR")

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import BackButton from "./backButton";
 
-export default function IssueCompleted({ imageContent, Continue, personaId }) {
+export default function IssueCompleted({ imageContent, Continue, id }) {
   let button = Continue ? (
-    <Link href={`/passports?personaId=${personaId}`} passHref>
+    <Link href={`/passports?id=${id}`} passHref>
       <button
         className={`mt-4 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75`}
       >

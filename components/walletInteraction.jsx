@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function WalletInteraction({
   error,
   gatacaSession,
-  cffSessionId,
+  issueSessionId,
   ticketIndex,
   issueTemplate,
   WEBSOCKET_SERVER,
@@ -20,7 +20,7 @@ export default function WalletInteraction({
   Placeholder,
   CompleteImg,
   Continue,
-  personaId,
+  id,
 }) {
   const [tickets, setTicket] = useState([]);
   const [ticketTimestamp, setTicketTimestamp] = useState(null);
@@ -90,7 +90,7 @@ export default function WalletInteraction({
     <>
       {/* <Websocket
         gatacaSessionId={gatacaSession}
-        cffSessionId={cffSessionId}
+        issueSessionId={issueSessionId}
         ticketIndex={ticketIndex}
         issueTemplate={issueTemplate}
         WEBSOCKET_SERVER={WEBSOCKET_SERVER}
@@ -101,13 +101,13 @@ export default function WalletInteraction({
       /> */}
 
       <Polling
-        issuanceSession={cffSessionId}
+        issuanceSession={issueSessionId}
         WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
         issueCompleted={() => {
           setIsComplete(true);
         }}
       />
-      <QRPrompt qrContent={qrContent} />
+      <QRPrompt qrContent={qrContent} Continue={Continue}/>
     </>
   );
 
@@ -115,7 +115,7 @@ export default function WalletInteraction({
     <>
       {/* <Websocket
         gatacaSessionId={gatacaSession}
-        cffSessionId={cffSessionId}
+        issueSessionId={issueSessionId}
         ticketIndex={ticketIndex}
         issueTemplate={issueTemplate}
         WEBSOCKET_SERVER={WEBSOCKET_SERVER}
@@ -126,7 +126,7 @@ export default function WalletInteraction({
       /> */}
       <Polling
         WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
-        issuanceSession={cffSessionId}
+        issuanceSession={issueSessionId}
         issueCompleted={() => {
           setIsComplete(true);
         }}
@@ -152,7 +152,7 @@ export default function WalletInteraction({
         />
       }
       Continue={Continue}
-      personaId={personaId}
+      id={id}
     />
   );
 

@@ -38,7 +38,7 @@ async function generateVCIrequest(sessionId, personaId) {
 export default async function Personas({ params, searchParams }) {
   // const { searchParams } = new URL(req.url);
   const { sessionId, id } = searchParams;
-  const cffSessionId = sessionId+ "-persona=" + id;
+  const issueSessionId = sessionId+ "-persona=" + id;
   const ticketIndex = id;
 
   const qrGenerationResult = await generateVCIrequest(sessionId, id);
@@ -48,7 +48,7 @@ export default async function Personas({ params, searchParams }) {
     <WalletInteraction
       error={qrGenerationResult.error}
       gatacaSession={gatacaSession}
-      cffSessionId={cffSessionId}
+      issueSessionId={issueSessionId}
       ticketIndex={ticketIndex}
       issueTemplate={process.env.ISSUE_TEMPLATE}
       WEBSOCKET_SERVER={process.env.WEBSOCKET_SERVER} //TODO there is not WB support
@@ -70,7 +70,7 @@ export default async function Personas({ params, searchParams }) {
       Placeholder={Placeholder}
       CompleteImg={Bluecheck}
       Continue={true}
-      personaId={id}
+      id={id}
     />
   );
 }

@@ -8,7 +8,7 @@ const qr = require("qr-image");
 const imageDataURI = require("image-data-uri");
 
 export async function POST(request) {
-  const { sessionId, gatacaSession, ticketId } = await request.json();
+  const { sessionId, issuerSession, ticketId } = await request.json();
   // const tickets = await getSessionData(sessionId, "tickets");
   const serverURI = process.env.WEBSOCKET_SERVER_URL + "/pre-offer-jwt-pid";
 

@@ -1,32 +1,45 @@
 import WalletInteraction from "@/components/walletInteraction";
 import { v4 as uuidv4 } from "uuid";
+import qr from "qr-image";
+import imageDataURI from "image-data-uri";
+import { streamToBuffer } from "@jorgeferrero/stream-to-buffer";
 
 import Placeholder from "./Placeholder.png";
 import Bluecheck from "./bluecheck.png";
 
 async function generateVCIrequest(personaId, sessionId) {
   try {
-    const response = await fetch(
-      process.env.WEBSOCKET_SERVER_URL +
-        "/pre-offer-jwt-passport?sessionId=" +
-        sessionId +
-        "&personaId=" +
-        personaId,
-      {
-        cache: "no-cache",
-      }
-    );
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || ""; // Fallback to '' if not set
+
+    const response = await fetch(`${baseUrl}/api/igrant`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-cache",
+      body: JSON.stringify({ id: personaId }),
+    });
     const responseData = await response.json();
+
+    let code = qr.image(responseData.credentialOffer, {
+      type: "png",
+      ec_level: "H",
+      size: 10,
+      margin: 10,
+    });
+    let mediaType = "PNG";
+    let encodedQR = imageDataURI.encode(await streamToBuffer(code), mediaType);
+
     // console.log(responseData);
-    return responseData;
+    let result = {
+      qr: encodedQR,
+      deepLink: responseData.credentialOffer,
+      issuerState: responseData.credentialExchangeId,
+    };
+    return result;
   } catch (error) {
     console.log(
-      `error trying ${
-        process.env.WEBSOCKET_SERVER_URL +
-        "/pre-offer-jwt-passport=" +
-        sessionId +
-        "&personaId=" +
-        personaId
+      `error trying ${baseUrl}/api/igrant
       }`
     );
     console.error("Error fetching Issuance Request", error);
@@ -41,15 +54,14 @@ export default async function Personas({ searchParams }) {
   const { id } = searchParams;
   const issueSessionId = uuidv4() + "-persona=" + id;
   const ticketIndex = id;
-
   const qrGenerationResult = await generateVCIrequest(id, issueSessionId);
-  const gatacaSession = qrGenerationResult.gatacaSession;
+  const issuerSession = qrGenerationResult.issuerState;
 
   return (
     <WalletInteraction
       error={qrGenerationResult.error}
-      gatacaSession={gatacaSession}
-      issueSessionId={issueSessionId}
+      // issuerSession={issuerSession}
+      issueSessionId={issuerSession}
       ticketIndex={ticketIndex}
       issueTemplate={process.env.ISSUE_TEMPLATE}
       WEBSOCKET_SERVER={process.env.WEBSOCKET_SERVER} //TODO there is not WB support
@@ -71,6 +83,7 @@ export default async function Personas({ searchParams }) {
       Placeholder={Placeholder}
       CompleteImg={Bluecheck}
       Terminate={true}
+      pollingMode={"igrant"}
     />
   );
 }

@@ -42,12 +42,12 @@ export default async function Personas({ params, searchParams }) {
   const ticketIndex = id;
 
   const qrGenerationResult = await generateVCIrequest(sessionId, id);
-  const gatacaSession = qrGenerationResult.gatacaSession;
+  const issuerSession = qrGenerationResult.issuerSession;
 
   return (
     <WalletInteraction
       error={qrGenerationResult.error}
-      gatacaSession={gatacaSession}
+      issuerSession={issuerSession}
       issueSessionId={issueSessionId}
       ticketIndex={ticketIndex}
       issueTemplate={process.env.ISSUE_TEMPLATE}
@@ -71,6 +71,7 @@ export default async function Personas({ params, searchParams }) {
       CompleteImg={Bluecheck}
       Continue={true}
       id={id}
+      pollingMode={"rfc-issuer"}
     />
   );
 }

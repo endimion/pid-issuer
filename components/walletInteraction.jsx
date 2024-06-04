@@ -5,11 +5,12 @@ import DeepLinkPrompt from "@/components/deepLinkPrompt";
 import IssueComplete from "@/components/issueComplete";
 import Websocket from "@/components/websocket";
 import Polling from "@/components/polling";
+import PollingIGrant from "@/components/pollingiGrant";
 import { useEffect, useState } from "react";
 
 export default function WalletInteraction({
   error,
-  gatacaSession,
+  issuerSession,
   issueSessionId,
   ticketIndex,
   issueTemplate,
@@ -21,7 +22,8 @@ export default function WalletInteraction({
   CompleteImg,
   Continue,
   id,
-  Terminate
+  Terminate,
+  pollingMode,
 }) {
   const [tickets, setTicket] = useState([]);
   const [ticketTimestamp, setTicketTimestamp] = useState(null);
@@ -87,20 +89,16 @@ export default function WalletInteraction({
     </>
   );
 
-  let content = (
-    <>
-      {/* <Websocket
-        gatacaSessionId={gatacaSession}
-        issueSessionId={issueSessionId}
-        ticketIndex={ticketIndex}
-        issueTemplate={issueTemplate}
-        WEBSOCKET_SERVER={WEBSOCKET_SERVER}
+  let pollingComponent =
+    pollingMode === "igrant" ? (
+      <PollingIGrant
+        issuanceSession={issueSessionId}
         WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
         issueCompleted={() => {
           setIsComplete(true);
         }}
-      /> */}
-
+      />
+    ) : (
       <Polling
         issuanceSession={issueSessionId}
         WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
@@ -108,14 +106,19 @@ export default function WalletInteraction({
           setIsComplete(true);
         }}
       />
-      <QRPrompt qrContent={qrContent} Continue={Continue}/>
+    );
+
+  let content = (
+    <>
+      {pollingComponent}
+      <QRPrompt qrContent={qrContent} Continue={Continue} />
     </>
   );
 
   let contentMobile = (
     <>
       {/* <Websocket
-        gatacaSessionId={gatacaSession}
+        issuerSessionId={issuerSession}
         issueSessionId={issueSessionId}
         ticketIndex={ticketIndex}
         issueTemplate={issueTemplate}
@@ -125,13 +128,7 @@ export default function WalletInteraction({
           setIsComplete(true);
         }}
       /> */}
-      <Polling
-        WEBSOCKET_SERVER_URL={WEBSOCKET_SERVER_URL}
-        issuanceSession={issueSessionId}
-        issueCompleted={() => {
-          setIsComplete(true);
-        }}
-      />
+      {pollingComponent}
       <DeepLinkPrompt deepLink={deepLink} />
     </>
   );

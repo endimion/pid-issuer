@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
-  const { sessionId, gatacaSession, ticketId } = await request.json();
+  const { sessionId, issuerSession, ticketId } = await request.json();
   const serverURI = process.env.WEBSOCKET_SERVER_URL + "/issueStatus?sessionId=" + sessionId;
 
   const options = {

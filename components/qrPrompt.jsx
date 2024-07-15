@@ -2,7 +2,7 @@ import Link from "next/link";
 import BackButton from "./backButton";
 
 export default function QRPrompt({ qrContent, Continue }) {
-  let credTtype = Continue ? "PID" : "ePassport";
+  let credTtype = Continue ? "PID" : "Passport";
 
   return (
     <main className="flex flex-col items-center justify-center w-full  p-12 bg-gray-100">
@@ -17,15 +17,18 @@ export default function QRPrompt({ qrContent, Continue }) {
           </h1>
           <ul className="list-decimal list-inside mt-4">
             <li>
-              Download an EWC Conformant Wallet app
-              <Link className="underline text-blue-500 ml-1" href="#">
+              Download an EWC conformant Wallet app
+              <Link className="underline text-blue-500 ml-1" href="https://ewcpilot.eu/wallet-setup/">
                 HERE
               </Link>
             </li>
             <li className="mt-2">
               With the newly installed EWC conformant Wallet, scan the QR code
-              on the left to accept the {`${credTtype}`} Credential on your
+              on the left to accept the {`${credTtype}`} credential on your
               mobile device.
+            </li>
+            <li className="mt-2">
+              PIN : 1234
             </li>
           </ul>
         </div>

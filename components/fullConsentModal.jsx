@@ -57,8 +57,8 @@ export default function FullConsentModal({initialState, consentClose}) {
           Data Protection and Privacy Disclaimer
         </h2>
         <p style={{paddingTop: "1rem"}}>
-          Welcome to the <span style={{fontWeight:600 }}>University of the Aegean `&apos;` s Verifiable Credentials
-          Issuance Service for Ferry Boarding passes</span>. Our commitment to your
+          Welcome to the <span style={{fontWeight:600 }}> EWCs Verifiable Credentials
+          Issuance Service</span>. Our commitment to your
           privacy and the protection of your personal data is paramount. This
           disclaimer outlines our practices in collecting, using, and
           safeguarding your data in compliance with the General Data Protection
@@ -69,65 +69,29 @@ export default function FullConsentModal({initialState, consentClose}) {
         <h3 style={{fontWeight:600, paddingTop: "1rem"}}>Data Collection and Use:</h3>
         <ul>
           <li>
-            To issue your verifiable boarding pass, we require you to submit
-            your booking reference (PNR) and surname. This information is used
-            exclusively during your current session for the purpose of verifying
-            your booking with Cyclades Fast Ferries and issuing the relevant
-            boarding pass as a verifiable credential directly to your wallet.
+            To issue your Verifiable Credentials no personal identification information are requested.
           </li>
         </ul>
 
         <h3 style={{fontWeight:600, paddingTop: "1rem"}}>Data Processing:</h3>
         <ul>
           <li>
-            Your personal data is processed in real-time and is not stored in
-            any of our systems beyond the duration of your session. Our
-            processing is strictly limited to the verification and issuance
-            operations necessary to provide you with the boarding pass.
+            Your personal data is nor requested nor processed or stored by this service. 
           </li>
           <li>
             We ensure that data is handled securely and transiently, with no
-            permanent records made of your personal information.
+            records made of your personal information.
           </li>
         </ul>
 
         <h3 style={{fontWeight:600, paddingTop: "1rem"}}>Data Sharing:</h3>
         <ul>
           <li>
-            Your data is shared only with Cyclades Fast Ferries for the sole
-            purpose of verifying your booking.
-          </li>
-          <li>
-            We do not retain, share, or use your data for any other purposes.
+            We do not retain, share, or use your data for any  purposes.
           </li>
         </ul>
 
-        <h3 style={{fontWeight:600, paddingTop: "1rem"}}>Data Security:</h3>
-        <ul>
-          <li>
-            Despite not storing your data, we implement robust security measures
-            during the processing to protect your data from unauthorized access
-            or misuse.
-          </li>
-          <li>
-            Access to data during processing is restricted to authorized
-            personnel committed to confidentiality.
-          </li>
-        </ul>
-
-        <h3 style={{fontWeight:600, paddingTop: "1rem"}}>Legal Basis and Your Rights:</h3>
-        <ul>
-          <li>
-            The processing of your data is based on your explicit consent,
-            required for the issuance of your verifiable boarding pass.
-          </li>
-          <li>
-            You retain full rights under GDPR, including the right to access,
-            rectify, or object to the processing of your personal data. Given
-            our non-storage policy, some rights such as deletion are inherently
-            respected by the design of our service.
-          </li>
-        </ul>
+       
 
         <p style={{fontWeight:600, paddingTop: "1rem"}}>Changes to Our Disclaimer:</p>
         <p>

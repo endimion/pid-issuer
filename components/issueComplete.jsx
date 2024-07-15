@@ -22,19 +22,19 @@ export default function IssueCompleted({
   );
   if (Terminate) {
     button = (
-      <Link href={`https://stg-ewcpilot-staging.kinsta.cloud/`} passHref>
+      <Link href={`https://ewcpilot.eu/`} passHref>
         <button
           className={`mt-4 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75`}
         >
-          Return to Mirco-site &rarr;
+          Return to Microsite &rarr;
         </button>
       </Link>
     );
   }
 
   let completeMessage = Continue
-    ? " The PID Credential has been sent to your wallet"
-    : " The ePassport Credential has been sent to your wallet";
+    ? " The PID credential has been sent to your wallet"
+    : " The Passport credential has been sent to your wallet";
 
   return (
     <main className="mt-4 p-4 flex flex-col items-center justify-center">

@@ -13,10 +13,12 @@ export default function Polling({
 
   useEffect(() => {
     let isMounted = true; // Track if component is mounted
+    console.log("useEffect  polling.jsx")
 
     const fetchData = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || ''; // Fallback to '' if not set
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || '/pid'; // Fallback to '' if not set
+        console.log("baseURL " +baseUrl)
         const response = await fetch(`${baseUrl}/api/issueStatus`, {
           method: 'POST',
           headers: {

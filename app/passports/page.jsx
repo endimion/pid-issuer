@@ -8,9 +8,8 @@ import Placeholder from "./Placeholder.png";
 import Bluecheck from "./bluecheck.png";
 
 async function generateVCIrequest(personaId, sessionId) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || "/pid"; // Fallback to '' if not set
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || ""; // Fallback to '' if not set
-
     const response = await fetch(`${baseUrl}/api/igrant`, {
       method: "POST",
       headers: {

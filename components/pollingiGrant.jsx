@@ -15,7 +15,7 @@ export default function PollingIGrant({
 
     const fetchData = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || ""; // Fallback to '' if not set
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || "/pid"; // Fallback to '' if not set
         const response = await fetch(`${baseUrl}/api/igrant?id=${issuanceSession}`, {
           method: "GET",
         });

@@ -22,7 +22,7 @@ export default function IssueCompleted({
   );
   if (Terminate) {
     button = (
-      <Link href={`https://ewcpilot.eu/`} passHref>
+      <Link href={`https://ewcpilot.eu/credentials/`} passHref>
         <button
           className={`mt-4 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75`}
         >

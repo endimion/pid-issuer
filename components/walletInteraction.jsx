@@ -24,6 +24,7 @@ export default function WalletInteraction({
   id,
   Terminate,
   pollingMode,
+  nextCredential
 }) {
   const [tickets, setTicket] = useState([]);
   const [ticketTimestamp, setTicketTimestamp] = useState(null);
@@ -152,6 +153,7 @@ export default function WalletInteraction({
       Continue={Continue}
       Terminate={Terminate}
       id={id}
+      nextCredential={nextCredential}
     />
   );
 

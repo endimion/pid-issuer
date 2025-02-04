@@ -46,27 +46,7 @@ export async function POST(req) {
 
   let requestBody = {};
   if (id === "1") {
-    // requestBody = {
-    //   issuanceMode: "InTime",
-    //   userPin: "",
-    //   credential: {
-    //     type: ["VerifiableCredential", "VerifiableAttestation", "Passport"],
-
-    //     credentialSubject: {
-    //       firstName: "Mario",
-    //       lastName: "Conti",
-    //       image: "",
-    //       serialNumber: "000010",
-    //       gender: "Male",
-    //       signature: "",
-    //       personalNumber: "19800411-5312",
-    //       issuerAuthority: "EWC",
-    //       birthDate: "1980-04-11",
-    //       expiryDate: "2025-04-12",
-    //       nationality: "Italy",
-    //     },
-    //   },
-    // };
+  
     requestBody= {
       "issuanceMode": "InTime",
       "credentialDefinitionId": "d329f541-b805-4d0c-a608-5c365852ab1c",
@@ -144,7 +124,7 @@ export async function POST(req) {
     });
     let res = await credentialResponse;
     let igrantResponse = await res.json();
-    // console.log(igrantResponse);
+    console.log(igrantResponse);
 
     let apiResponse = {
       status: "OK",

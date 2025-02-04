@@ -8,7 +8,7 @@ import Placeholder from "./Placeholder.png";
 import Bluecheck from "./bluecheck.png";
 
 async function generateVCIrequest(personaId, sessionId) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH_BACKEND || ""; // Fallback to '' if not set
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH_BACKEND || "http://localhost:3000/pid"; // Fallback to '' if not set
   try {
     
 
@@ -85,6 +85,8 @@ export default async function Personas({ searchParams }) {
       CompleteImg={Bluecheck}
       Terminate={true}
       pollingMode={"igrant"}
+      Continue={true}
+      nextCredential={"photoID"}
     />
   );
 }

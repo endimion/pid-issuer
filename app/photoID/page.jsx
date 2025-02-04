@@ -8,10 +8,8 @@ async function generateVCIrequest(sessionId, personaId) {
   try {
     const response = await fetch(
       process.env.WEBSOCKET_SERVER_URL +
-        "/issue-pid-pre-auth?sessionId=" +
-        sessionId +
-        "&personaId=" +
-        personaId,
+        "/offer-tx-code?credentialType=PhotoID&sessionId=" +
+        sessionId,
       {
         cache: "no-cache",
       }
@@ -69,10 +67,10 @@ export default async function Personas({ params, searchParams }) {
       deepLink={qrGenerationResult.deepLink}
       Placeholder={Placeholder}
       CompleteImg={Bluecheck}
-      Continue={true}
+      Continue={false}
       id={id}
       pollingMode={"rfc-issuer"}
-      nextCredential={"passport"}
+
     />
   );
 }

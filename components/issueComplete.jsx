@@ -8,19 +8,13 @@ export default function IssueCompleted({
   Continue,
   id,
   Terminate,
+  nextCredential,
 }) {
-  let button = Continue ? (
-    <Link href={`/passports?id=${id}`} passHref>
-      <button
-        className={`mt-4 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75`}
-      >
-        Issue Passport &rarr;
-      </button>
-    </Link>
-  ) : (
-    <BackButton />
-  );
-  if (Terminate) {
+  
+  
+  let button;
+
+  if (!Continue) {
     button = (
       <Link href={`https://ewcpilot.eu/credentials/`} passHref>
         <button
@@ -30,7 +24,35 @@ export default function IssueCompleted({
         </button>
       </Link>
     );
+  } else {
+    if (nextCredential === "passport") {
+      button = (
+        <Link href={`/passports?id=${id}`} passHref>
+          <button
+            className="mt-4 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75"
+          >
+            Issue Passport &rarr;
+          </button>
+        </Link>
+      );
+    } else if (nextCredential === "photoID") {
+      button = (
+        <Link href={`/photoID?id=${id}`} passHref>
+          <button
+            className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+          >
+            Issue Photo ID &rarr;
+          </button>
+        </Link>
+      );
+    }  
   }
+
+
+
+
+
+ 
 
   let completeMessage = Continue
     ? " The PID credential has been sent to your wallet"

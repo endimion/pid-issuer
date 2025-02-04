@@ -46,71 +46,91 @@ export async function POST(req) {
 
   let requestBody = {};
   if (id === "1") {
-    requestBody = {
-      issuanceMode: "InTime",
-      userPin: "",
-      credential: {
-        type: ["VerifiableCredential", "VerifiableAttestation", "Passport"],
+    // requestBody = {
+    //   issuanceMode: "InTime",
+    //   userPin: "",
+    //   credential: {
+    //     type: ["VerifiableCredential", "VerifiableAttestation", "Passport"],
 
-        credentialSubject: {
-          firstName: "Mario",
-          lastName: "Conti",
-          image: "",
-          serialNumber: "000010",
-          gender: "Male",
-          signature: "",
-          personalNumber: "19800411-5312",
-          issuerAuthority: "EWC",
-          birthDate: "1980-04-11",
-          expiryDate: "2025-04-12",
-          nationality: "Italy",
-        },
-      },
-    };
+    //     credentialSubject: {
+    //       firstName: "Mario",
+    //       lastName: "Conti",
+    //       image: "",
+    //       serialNumber: "000010",
+    //       gender: "Male",
+    //       signature: "",
+    //       personalNumber: "19800411-5312",
+    //       issuerAuthority: "EWC",
+    //       birthDate: "1980-04-11",
+    //       expiryDate: "2025-04-12",
+    //       nationality: "Italy",
+    //     },
+    //   },
+    // };
+    requestBody= {
+      "issuanceMode": "InTime",
+      "credentialDefinitionId": "d329f541-b805-4d0c-a608-5c365852ab1c",
+      "credential": {
+        "claims": {
+          "birthDate": "1990-05-15",
+          "expiryDate": "2033-03-01",
+          "firstName": "Mario",
+          "gender": "Male",
+          "image": "NIL",
+          "issuerAuthority": "Swedish Police Authority",
+          "lastName": "Conti",
+          "nationality": "Italy",
+          "personalNumber": "900515-1234",
+          "serialNumber": "X12345678",
+          "signature": "NIL"
+        }
+      }
+    }
+  
+  
   } else if (id === "2") {
-    requestBody = {
-      issuanceMode: "InTime",
-      userPin: "",
-      credential: {
-        type: ["VerifiableCredential", "VerifiableAttestation", "Passport"],
+    requestBody= {
+      "issuanceMode": "InTime",
+      "credentialDefinitionId": "d329f541-b805-4d0c-a608-5c365852ab1c",
+      "credential": {
+        "claims": {
+          "birthDate": "1990-05-15",
+          "expiryDate": "2033-03-01",
+          "firstName": "Hannah",
+          "gender": "Male",
+          "image": "NIL",
+          "issuerAuthority": "Swedish Police Authority",
+          "lastName": "Matkalainen",
+          "nationality": "Finland",
+          "personalNumber": "900515-1234",
+          "serialNumber": "X12345678",
+          "signature": "NIL"
+        }
+      }
+    }
 
-        credentialSubject: {
-          firstName: "Hannah",
-          lastName: "Matkalainen",
-          image: "",
-          serialNumber: "000011",
-          gender: "Female",
-          signature: "",
-          personalNumber: "19800411-5313",
-          issuerAuthority: "EWC",
-          birthDate: "2005-02-07",
-          expiryDate: "2025-04-12",
-          nationality: "Finland",
-        },
-      },
-    };
   } else {
-    requestBody = {
-      issuanceMode: "InTime",
-      userPin: "",
-      credential: {
-        type: ["VerifiableCredential", "VerifiableAttestation", "Passport"],
+    
 
-        credentialSubject: {
-          firstName: "Felix",
-          lastName: "Fischer",
-          image: "",
-          serialNumber: "000012",
-          gender: "Male",
-          signature: "",
-          personalNumber: "19800411-5313",
-          issuerAuthority: "EWC",
-          birthDate: "1953-01-23",
-          expiryDate: "2025-04-12",
-          nationality: "German",
-        },
-      },
-    };
+    requestBody= {
+      "issuanceMode": "InTime",
+      "credentialDefinitionId": "d329f541-b805-4d0c-a608-5c365852ab1c",
+      "credential": {
+        "claims": {
+          "birthDate": "1990-05-15",
+          "expiryDate": "2033-03-01",
+          "firstName": "Felix",
+          "gender": "Male",
+          "image": "NIL",
+          "issuerAuthority": "Swedish Police Authority",
+          "lastName": "Fischer",
+          "nationality": "German",
+          "personalNumber": "900515-1234",
+          "serialNumber": "X12345678",
+          "signature": "NIL"
+        }
+      }
+    }
   }
 
   try {

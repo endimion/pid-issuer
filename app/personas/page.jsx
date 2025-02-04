@@ -8,7 +8,7 @@ async function generateVCIrequest(sessionId, personaId) {
   try {
     const response = await fetch(
       process.env.WEBSOCKET_SERVER_URL +
-        "/offer-pid-persona?sessionId=" +
+        "/offer-tx-code?credentialType=VerifiablePIDSDJWT&sessionId=" +
         sessionId +
         "&personaId=" +
         personaId,
@@ -38,7 +38,7 @@ async function generateVCIrequest(sessionId, personaId) {
 export default async function Personas({ params, searchParams }) {
   // const { searchParams } = new URL(req.url);
   const { sessionId, id } = searchParams;
-  const issueSessionId = sessionId+ "-persona=" + id;
+  const issueSessionId = sessionId //+ "-persona=" + id;
   const ticketIndex = id;
 
   const qrGenerationResult = await generateVCIrequest(sessionId, id);
